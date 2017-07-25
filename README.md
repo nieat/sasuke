@@ -1,19 +1,14 @@
-# Welcome to Revel
+# FREE BI TOOL
 
-A high-productivity web framework for the [Go language](http://www.golang.org/).
+go/revelで作るBIツールです
 
-
-### Start the web server:
-
-   revel run myapp
+## 
 
 ### Go to http://localhost:9000/ and you'll see:
 
     "It works"
 
 ## Code Layout
-
-The directory structure of a generated Revel application:
 
     conf/             Configuration directory
         app.conf      Main app configuration file
@@ -22,24 +17,28 @@ The directory structure of a generated Revel application:
     app/              App sources
         init.go       Interceptor registration
         controllers/  App controllers go here
+        		   /api   APIとajaxはここ
         views/        Templates directory
-
+        config/       viewとかバリデーションで使う設定ファイルはここにおいてcontrollerで呼び出す
+        service/      generate.go みたいに機能ごとにファイル作っていきたい csv.goとかとか
+        
     messages/         Message files
 
+	resource/         
+        	scss/     
+        	js/      .vueファイルとか置く
+      
     public/           Public static assets
         css/          CSS files
         js/           Javascript files
-        images/       Image files
+        images/       Image files	
 
     tests/            Test suites
-
-
-## Help
-
-* The [Getting Started with Revel](http://revel.github.io/tutorial/gettingstarted.html).
-* The [Revel guides](http://revel.github.io/manual/index.html).
-* The [Revel sample apps](http://revel.github.io/examples/index.html).
-* The [API documentation](https://godoc.org/github.com/revel/revel).
-
+    .env              設定とかがここに書かれるようにする
+	npm 
+	
+設定は.envファイルに追記する
 IP制限/adminユーザーしかできない設定 ->filterでやる
 
+クエリービルダーは以下を使用する
+https://github.com/doug-martin/goqu
