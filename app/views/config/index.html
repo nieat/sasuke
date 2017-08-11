@@ -3,5 +3,35 @@
 
 <h1>Initial Setting</h1>
 
+<form method="POST" action="Config/Save">
+	
+<select name="db">
+	<option value="MySQL">MySQL</option>
+</select>
+
+<p>
+	<label>dbhost</label>
+	<input type="text" name="host"> *
+</p>
+
+<p>
+	<label>dbname</label>
+	<input type="text" name="dbname"> *
+</p>
+
+<p>
+	<label>dbuser</label>
+	<input type="text" name="dbuser"> *
+</p>
+
+<p>
+	<label>password</label>
+	<input type="password" name="password"> *
+</p>
+	
+<p class="buttons">
+	<input type="submit" value="Save">
+</p>
+</form>
 
 {{template "footer.html" .}}
