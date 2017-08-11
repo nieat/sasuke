@@ -1,43 +1,62 @@
 {{set . "title" "Initial Setting"}}
+{{template "head.html" .}}
 {{template "header.html" .}}
 
-<h1>Initial Setting</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<h3>Initial Setting</h3>
 
-{{if .errors}}<p>Please Fix errors marked below.</p>{{end}}
+			{{if .errors}}
+			<div class="alert alert-danger" role="alert">
+				Please Fix errors marked below.
+			</div>
+			{{end}}
 
-<form method="POST" action="Config/Save">
-	
-<select name="db">
-	<option value="mysql">MySQL</option>
-</select>
+			<form method="POST" action="Config/Save">
+				<div class="form-group">
+					<label for="db">DB type</label>
+					<select name="db" class="form-control" disabled>
+						<option value="mysql">MySQL</option>
+					</select>
+				</div>
 
-<p class="{{if .error.host}}error{{end}}">
-	<label>dbhost</label>
-	<input type="text" name="host" value="{{.flash.username}}"/>
-	<span class="error">{{.errors.host.Message}}</span>	
-</p>
+				<div class="form-group">
+					<p class="{{if .error.host}}error{{end}}">
+						<label for="host">dbhost</label><span class="text-danger"> *{{.errors.host.Message}}</span>
+						<input type="text" name="host" value="{{.flash.username}}" class="form-control"/>
+					</p>
+				</div>
 
-<p class="{{if .error.dbname}}error{{end}}">
-	<label>dbname</label>
-	<input type="text" name="dbname" value="{{.flash.dbname}}">
-	<span class="error">{{.errors.dbname.Message}}</span>
-</p>
+				<div class="form-group">
+					<p class="{{if .error.dbname}}error{{end}}">
+						<label>dbname</label><span class="text-danger"> *{{.errors.dbname.Message}}</span>
+						<input type="text" name="dbname" value="{{.flash.dbname}}" class="form-control">
+					</p>
+				</div>
 
-<p class="{{if .error.dbuser}}error{{end}}">
-	<label>dbuser</label>
-	<input type="text" name="dbuser" value="{{.flash.dbuser}}">
-	<span class="error">{{.errors.dbuser.Message}}</span>
-</p>
+				<div class="form-group">
+					<p class="{{if .error.dbuser}}error{{end}}">
+						<label>dbuser</label><span class="text-danger"> *{{.errors.dbuser.Message}}</span>
+						<input type="text" name="dbuser" value="{{.flash.dbuser}}" class="form-control">
+					</p>
+				</div>
 
-<p class="{{if .error.password}}error{{end}}">
-	<label>password</label>
-	<input type="password" name="password" value="{{.flash.password}}">
-	<span class="error">{{.errors.password.Message}}</span>
-</p>
-	
-<p class="buttons">
-	<input type="submit" value="Save">
-</p>
-</form>
+				<div class="form-group">
+					<p class="{{if .error.password}}error{{end}}">
+						<label>password</label><span class="text-danger"> *{{.errors.password.Message}}</span>
+						<input type="password" name="password" value="{{.flash.password}}" class="form-control">
+					</p>
+				</div>
 
+
+				<p class="buttons">
+					<input type="submit" value="Save" class="btn btn-success">
+				</p>
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
 {{template "footer.html" .}}

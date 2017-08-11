@@ -1,4 +1,4 @@
-package filehandler
+package file
 
 import (
 	"os"
