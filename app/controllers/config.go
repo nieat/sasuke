@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"bufio"
 	"os"
-	"log"
+	"bufio"
+	//"log"
 
 	"github.com/revel/revel"
 )
@@ -11,6 +11,7 @@ import (
 type Config struct {
 	*revel.Controller
 }
+
 
 // 初期設定入力ページ
 func (c Config) Index() revel.Result {
@@ -23,25 +24,39 @@ func (c Config) Confirm() revel.Result{
 }
 
 // 初期設定保存
-// ToDo 引数は構造体（？）で定義
-func (c Config) Save(db string, host string, dbuser string, dbname string, password string) revel.Result {
+func (c Config) Save() revel.Result {
+
+	// Formパラメータの取得
+	db 		 := c.Params.Form.Get("db")
+	host	 := c.Params.Form.Get("host")
+	dbuser	 := c.Params.Form.Get("dbuser")
+	dbname 	 := c.Params.Form.Get("dbname")
+	password := c.Params.Form.Get("password")
 
 	// ToDo: テスト接続して接続情報の有効性を確認する。
 
 	// .envファイルへの書き込み文生成
-	// ToDo: リファクタリング
+	dbinfoString := "db="+ db + "\n" +
+					"host=" + host + "\n" +
+					"dbuser=" + dbuser + "\n" +
+					"dbname=" + dbname + "\n" +
+					"password=" + password
+	CreateWriteFile(".env", dbinfoString)
+	return c.Redirect(App.Index)
+}
 
-	dbinfoString := "db="+ db + "\n" + "host=" + host + "\n" + "dbuser=" + dbuser + "\n" + "dbname=" + dbname + "\n" + "password=" + password
+// ファイルを新規作成（既に存在する場合は更新）し、文字列を書き込む
+func CreateWriteFile(filename string, write_string string){
+	_, cerr := os.Create(filename) //既に存在する場合は上書き
+	if cerr != nil{
+		panic(cerr)
+	}
 
-	// .envファイルへの書き込み
-	// ToDo: 既に書き込みがある場合、一度リフレッシュする
-	write_file, _ := os.OpenFile(".env", os.O_WRONLY|os.O_APPEND, 0644)
+	write_file, _ := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0644)
 	bw := bufio.NewWriter(write_file)
-	_, err := bw.WriteString(dbinfoString)
-	if err != nil {
-		log.Fatal(err)
+	_, werr := bw.WriteString(write_string)
+	if werr != nil {
+		panic(werr)
 	}
 	bw.Flush()
-
-	return c.Redirect(App.Index) //ToDo: トップページにリダイレクト
 }
