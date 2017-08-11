@@ -2,14 +2,17 @@
 {{template "head.html" .}}
 <!--goからjsに変数渡す-->
 {{template "header.html" .}}
-<body>
-<div class="container">
-  <div class="row">
-    <div class="span6">
-      {{template "flash.html" .}}
-    </div>
-  </div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-8">
+			こっちにテーブル表示
+		</div>
+		<div class="col-4">
+			こっちにform
+		</div>
+	</div>
 </div>
+
 </body>
 <script>
 	const table_schema = {
