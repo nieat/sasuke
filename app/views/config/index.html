@@ -2,49 +2,6 @@
 {{template "header.html" .}}
 
 <h1>Initial Setting</h1>
-<form method="POST" action="{{url "Config.Confirm"}}">
 
-	<p>
-		<label>DB</label> /* Todo: 複数のRDBMSに対応可能にする。 */
-		<label>MySQL</label>
-	</p>
-
-	{{ with $field := field "dbhost" .}}
-		<p class="{{$field.ErrorClass}}">
-			<label>dbhost</label>
-			<input type="text" name="{{$$field.Name}}"> *
-			<span class=""error">{{$field.Error}}</span>
-		</p>
-	{{ end }}
-
-	{{ with $field := field "dbname" .}}
-		<p class="{{$field.ErrorClass}}">
-			<label>dbname</label>
-			<input type="text" name="{{$$field.Name}}"> *
-			<span class=""error">{{$field.Error}}</span>
-		</p>
-	{{ end }}
-
-	{{ with $field := field "dbuser" .}}
-		<p class="{{$field.ErrorClass}}">
-			<label>dbuser</label>
-			<input type="text" name="{{$$field.Name}}"> *
-			<span class=""error">{{$field.Error}}</span>
-		</p>
-	{{ end }}
-
-	{{ with $field := field "password" .}}
-		<p class="{{$field.ErrorClass}}">
-			<label>dbuser</label>
-			<input type="text" name="{{$$field.Name}}"> *
-			<span class=""error">{{$field.Error}}</span>
-		</p>
-	{{ end }}
-
-
-<p class="buttons">
-		<input type="submit" value="Save">
-	</p>
-</form>
 
 {{template "footer.html" .}}

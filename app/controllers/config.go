@@ -15,7 +15,6 @@ func (c Config) Index() revel.Result {
 
 // 初期設定確認ページ
 func (c Config) Confirm() revel.Result{
-
 	return c.Render()
 }
 
