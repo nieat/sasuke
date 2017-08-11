@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/revel/revel"
+	// "log"
 )
 
 type App struct {
@@ -12,8 +13,8 @@ func (c App) Index() revel.Result {
 	return c.Render()
 }
 
-func (c App) Execute() revel.Result {
-	return c.Render()
+func (c App) Execute(table string, relation string, columns []string, options []string) revel.Result {
+	return c.Redirect(App.Result)
 }
 
 
