@@ -2,11 +2,12 @@
 
 go/revelで作るBIツールです
 
-## 
+## 命名規則
+変数はスネーク
+メソッドはキャメルで
 
-### Go to http://localhost:9000/ and you'll see:
 
-    "It works"
+## Go to http://localhost:9000/ and you'll see:
 
 ## Code Layout
 
