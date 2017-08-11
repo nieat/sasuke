@@ -3,30 +3,36 @@
 
 <h1>Initial Setting</h1>
 
+{{if .errors}}<p>Please Fix errors marked below.</p>{{end}}
+
 <form method="POST" action="Config/Save">
 	
 <select name="db">
 	<option value="mysql">MySQL</option>
 </select>
 
-<p>
+<p class="{{if .error.host}}error{{end}}">
 	<label>dbhost</label>
-	<input type="text" name="host"> *
+	<input type="text" name="host" value="{{.flash.username}}"/>
+	<span class="error">{{.errors.host.Message}}</span>	
 </p>
 
-<p>
+<p class="{{if .error.dbname}}error{{end}}">
 	<label>dbname</label>
-	<input type="text" name="dbname"> *
+	<input type="text" name="dbname" value="{{.flash.dbname}}">
+	<span class="error">{{.errors.dbname.Message}}</span>
 </p>
 
-<p>
+<p class="{{if .error.dbuser}}error{{end}}">
 	<label>dbuser</label>
-	<input type="text" name="dbuser"> *
+	<input type="text" name="dbuser" value="{{.flash.dbuser}}">
+	<span class="error">{{.errors.dbuser.Message}}</span>
 </p>
 
-<p>
+<p class="{{if .error.password}}error{{end}}">
 	<label>password</label>
-	<input type="password" name="password"> *
+	<input type="password" name="password" value="{{.flash.password}}">
+	<span class="error">{{.errors.password.Message}}</span>
 </p>
 	
 <p class="buttons">

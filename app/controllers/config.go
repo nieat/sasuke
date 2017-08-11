@@ -1,10 +1,7 @@
 package controllers
 
 import (
-	"os"
-	"bufio"
-	"log"
-
+	"sasuke/app/service/filehandler"
 	"github.com/revel/revel"
 )
 
@@ -41,6 +38,17 @@ func (c Config) Save() revel.Result {
 	dbname 	 := c.Params.Form.Get("dbname")
 	password := c.Params.Form.Get("password")
 
+	// バリデーション
+	c.Validation.Required(host)
+	c.Validation.Required(dbuser)
+	c.Validation.Required(dbname)
+	c.Validation.Required(password)
+	if c.Validation.HasErrors(){
+		c.Validation.Keep()
+		c.FlashParams()
+		return c.Redirect(Config.Index)
+	}
+
 	// ToDo: テスト接続して接続情報の有効性を確認する。
 
 	// .envファイルへの書き込み文生成
@@ -49,22 +57,7 @@ func (c Config) Save() revel.Result {
 					"dbuser=" + dbuser + "\n" +
 					"dbname=" + dbname + "\n" +
 					"password=" + password
-	CreateWriteFile(".env", dbconfig)
+	f := &filehandler.Handler{}
+	f.CreateWriteFile(".env", dbconfig)
 	return c.Redirect(App.Index)
-}
-
-// ファイルを新規作成（既に存在する場合は更新）し、文字列を書き込む
-func CreateWriteFile(filename string, write_string string){
-	_, cerr := os.Create(filename) //既に存在する場合は上書き
-	if cerr != nil{
-		log.Fatal(cerr)
-	}
-
-	write_file, _ := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0644)
-	bw := bufio.NewWriter(write_file)
-	_, werr := bw.WriteString(write_string)
-	if werr != nil {
-		log.Fatal(werr)
-	}
-	bw.Flush()
 }
