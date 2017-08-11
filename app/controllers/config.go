@@ -3,7 +3,7 @@ package controllers
 import (
 	"os"
 	"bufio"
-	//"log"
+	"log"
 
 	"github.com/revel/revel"
 )
@@ -49,14 +49,14 @@ func (c Config) Save() revel.Result {
 func CreateWriteFile(filename string, write_string string){
 	_, cerr := os.Create(filename) //既に存在する場合は上書き
 	if cerr != nil{
-		panic(cerr)
+		log.Fatal(cerr)
 	}
 
 	write_file, _ := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0644)
 	bw := bufio.NewWriter(write_file)
 	_, werr := bw.WriteString(write_string)
 	if werr != nil {
-		panic(werr)
+		log.Fatal(werr)
 	}
 	bw.Flush()
 }
