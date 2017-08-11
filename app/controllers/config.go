@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"sasuke/app/service/filehandler"
 	"github.com/revel/revel"
+	"sasuke/app/service/file"
 )
 
 type Config struct {
@@ -52,12 +52,13 @@ func (c Config) Save() revel.Result {
 	// ToDo: テスト接続して接続情報の有効性を確認する。
 
 	// .envファイルへの書き込み文生成
-	dbconfig := "db="+ db + "\n" +
+	dbconfig := 	"db="+ db + "\n" +
 					"host=" + host + "\n" +
 					"dbuser=" + dbuser + "\n" +
 					"dbname=" + dbname + "\n" +
 					"password=" + password
-	f := &filehandler.Handler{}
+	f := &file.Handler{}
 	f.CreateWriteFile(".env", dbconfig)
+
 	return c.Redirect(App.Index)
 }
