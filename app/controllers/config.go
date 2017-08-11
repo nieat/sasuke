@@ -12,6 +12,14 @@ type Config struct {
 	*revel.Controller
 }
 
+// DB接続情報
+var(
+	db			string
+	host		string
+	dbuser		string
+	dbname		string
+	password	string
+)
 
 // 初期設定入力ページ
 func (c Config) Index() revel.Result {
@@ -36,12 +44,12 @@ func (c Config) Save() revel.Result {
 	// ToDo: テスト接続して接続情報の有効性を確認する。
 
 	// .envファイルへの書き込み文生成
-	dbinfoString := "db="+ db + "\n" +
+	dbconfig := "db="+ db + "\n" +
 					"host=" + host + "\n" +
 					"dbuser=" + dbuser + "\n" +
 					"dbname=" + dbname + "\n" +
 					"password=" + password
-	CreateWriteFile(".env", dbinfoString)
+	CreateWriteFile(".env", dbconfig)
 	return c.Redirect(App.Index)
 }
 
