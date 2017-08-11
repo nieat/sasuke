@@ -1,0 +1,17 @@
+package: bi_tool
+import:
+- package: github.com/revel/modules
+  version: v0.17
+  subpackages:
+  - static/app/controllers
+  - testrunner/app
+  - testrunner/app/controllers
+- package: github.com/revel/revel
+  version: v0.17.1
+  vcs: git
+  subpackages:
+  - testing
+- package: github.com/gocraft/dbr
+  version: v2.1
+- package: github.com/joho/godotenv
+  version: v1.1
