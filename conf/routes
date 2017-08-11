@@ -13,9 +13,6 @@ GET     /config                                 Config.Index
 GET     /config/confirm                         Config.Confirm
 POST    /config/save                            Config.Save
 
-GET 	/api/app
-ApiApp.Execute
-
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
