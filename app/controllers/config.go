@@ -1,6 +1,8 @@
 package controllers
 
-import ("github.com/revel/revel")
+import (
+	"github.com/revel/revel"
+)
 
 type Config struct {
 	*revel.Controller
