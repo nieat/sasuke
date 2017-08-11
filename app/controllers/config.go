@@ -1,6 +1,8 @@
 package controllers
 
-import ("github.com/revel/revel")
+import (
+	"github.com/revel/revel"
+)
 
 type Config struct {
 	*revel.Controller
@@ -13,6 +15,7 @@ func (c Config) Index() revel.Result {
 
 // 初期設定確認ページ
 func (c Config) Confirm() revel.Result{
+
 	return c.Render()
 }
 
