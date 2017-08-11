@@ -7,6 +7,8 @@ module:testrunner
 # module:jobs
 
 GET     /                                       App.Index
+POST    /execute								App.execute
+GET     /result                                 App.result
 GET     /config                                 Config.Index
 GET     /config/confirm                         Config.Confirm
 POST    /config/save                            Config.Save

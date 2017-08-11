@@ -1,0 +1,19 @@
+{{set . "title" "Home"}}
+{{template "head.html" .}}
+<!--goからjsに変数渡す-->
+{{template "header.html" .}}
+
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+<script>
+	const table_schema = {
+		users:['id','first_name','last_name','created_at','updated_at'],
+		article :['id','user_id','content','created_at','updated_at']
+	}
+</script>
+{{template "footer.html" .}}

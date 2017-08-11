@@ -11,3 +11,12 @@ type App struct {
 func (c App) Index() revel.Result {
 	return c.Render()
 }
+
+func (c App) Execute() revel.Result {
+	return c.Render()
+}
+
+
+func (c App) Result() revel.Result {
+	return c.Render()
+}
