@@ -3,50 +3,17 @@
 <!--goからjsに変数渡す-->
 {{template "header.html" .}}
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-8">
-      <div id='diagrams' style='border: solid 1px black; width:90%; height:700px'>
-        <table v-for="table in table_schema">
-          <tr>
-            <th>{{ "{{table.table_name}}" }}</th>
-          </tr>
-          <tr v-for="column in table.columns">
-            <td>
-              <input type="checkbox" v-bind:id="column" v-bind:value="column" v-model="request_queries"> 
-              <label for="column">{{ "{{column}}" }}</label>
-            </td>
-          </tr>
-        </table>
-        <!-- 選択したカラム名が動的に取得できているかを確認 -->
-        <span>{{ "{{request_queries}}" }}</span>
-      </div>
-      <!-- TODO あとで、上のテーブルタグの部分は、コンポーネントとして、別ファイルに分ける -->
-      <!-- <table-diagram></table-diagram> -->
-    </div>
-    <div class="col-4">
-        <p>ここにフォーム</p>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-8">
+			{{ template "table_er_list.html" }}
+		</div>
+		<div class="col-4">
+			{{ template "query_form.html" }}
+		</div>
+	</div>
 </div>
 
 </body>
-<script>
-  // import TableDiagram from './components/table_diagram'	
-
-  const table_schema = [
-	{table_name: 'users', columns: ['id','first_name','last_name','created_at','updated_at']},
-	{table_name: 'article', columns: ['id','user_id','content','created_at','updated_at']}
-  ]
-
-  var tables = new Vue({
-    el: '#diagrams',
-    data: function () {
-      return {
-        table_schema,
-        request_queries: []
-      }
-    }
-  })
-</script>
+<script type="text/javascript" src="/public/js/vue.min.js"></script>
 <script src="/public/js/app_index.js"></script>
 {{template "footer.html" .}}

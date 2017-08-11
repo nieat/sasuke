@@ -1,0 +1,17 @@
+{{set . "title" "Home"}}
+{{template "head.html" .}}
+<!--goからjsに変数渡す-->
+{{template "header.html" .}}
+<body>
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+      <!-- {{.columns}} -->
+    </div>
+    <!-- todo queryの実行後結果をテーブルで表示 -->
+    {{.query}}
+  </div>
+</div>
+</body>
+{{template "footer.html" .}}

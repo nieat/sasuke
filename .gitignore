@@ -8,3 +8,5 @@ npm-debug.log
 !.gitkeep
 vendor/
 .env
+public/js/*
+public/css/*
