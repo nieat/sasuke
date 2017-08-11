@@ -28,8 +28,10 @@ func (c Config) Save(db string, host string, dbuser string, dbname string, passw
 
 	// ToDo: テスト接続して接続情報の有効性を確認する。
 
-	// .envファイルへの書き込み文生成（テスト文字列）
-	dbinfoString := "db="+ db + "\n" + "host=" + host + "\n" + "dbuser=" + dbuser + "\n" + "dbname=" + dbname + "\n" + "password" + password
+	// .envファイルへの書き込み文生成
+	// ToDo: リファクタリング
+
+	dbinfoString := "db="+ db + "\n" + "host=" + host + "\n" + "dbuser=" + dbuser + "\n" + "dbname=" + dbname + "\n" + "password=" + password
 
 	// .envファイルへの書き込み
 	// ToDo: 既に書き込みがある場合、一度リフレッシュする
