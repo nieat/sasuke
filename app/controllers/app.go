@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/revel/revel"
+	"sasuke/app/service/sql"
 )
 
 type App struct {
@@ -9,6 +10,8 @@ type App struct {
 }
 
 func (c App) Index() revel.Result {
+	s := &sql.Handler{}
+	s.FetchTableSchema()
 	return c.Render()
 }
 
