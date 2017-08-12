@@ -4,6 +4,7 @@ import (
 	"os"
 	"bufio"
 	"log"
+	"github.com/joho/godotenv"
 )
 
 type Handler struct{
@@ -23,4 +24,12 @@ func(h *Handler) CreateWriteFile(filename string, write_string string){
 		log.Fatal(werr)
 	}
 	bw.Flush()
+}
+
+// .envファイルの読み込み
+func(h *Handler) LoadEnv(){
+	err := godotenv.Load()
+	if err != nil{
+		log.Fatal("Error loading .env file")
+	}
 }
