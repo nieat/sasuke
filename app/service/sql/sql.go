@@ -6,6 +6,8 @@ import (
 	//"github.com/joho/godotenv"
 	//"log"
 	"fmt"
+	"log"
+	"database/sql"
 )
 
 type Handler struct {
@@ -33,17 +35,34 @@ func (h *Handler)FetchTableSchema () {
 	if err != nil {
 		panic(err)
 	}
-	sess := conn.NewSession(nil)
+	session := conn.NewSession(nil)
 	var tables []string
-	sess.SelectBySql("show tables").Load(&tables)
+	session.SelectBySql("show tables").Load(&tables)
 
-	//var builder [][]string
-	//var table_columns [][]string
-	for i := 0;i <len(tables) ;i ++  {
-		//sess.SelectBySql("SHOW COLUMNS FROM"+tables[i]).Load(&builder)
-		a := sess.SelectBySql("SHOW COLUMNS FROM"+tables[i])
-		fmt.Print(tables[i],a)
+	//var table_schema [][]string
+	mysql, error := sql.Open(db,dbuser+":"+password+"@tcp("+host+":"+port+")/"+dbname)
+	if error != nil {
+		log.Fatal("open erro: %v", err)
 	}
+
+	for i := 0;i <len(tables) ;i ++  {
+		query := "SHOW COLUMNS FROM "+tables[i]
+
+		rows, err := mysql.Query(query)
+		defer rows.Close()
+		if err != nil {
+			log.Fatal( err)
+		}
+
+		fmt.Print(rows);
+		for rows.Next() {
+			var Field string
+			fmt.Printf(Field)
+		}
+
+	}
+
+	//fmt.Println(table_columns[:]);
 
 
 	// 内容を整形する
@@ -52,6 +71,14 @@ func (h *Handler)FetchTableSchema () {
 
 	return
 }
+
+	func getDB() (db *sql.DB) {
+	db, err := sql.Open("mysql", "USER:PASSWORD/DB_NAME")
+		if err != nil {
+		log.Fatal("open erro: %v", err)
+		}
+	return db
+	}
 
 //func loadEnv()  {
 //	err := godotenv.Load()
