@@ -33,12 +33,12 @@ func (c Config) Confirm() revel.Result{
 func (c Config) Save() revel.Result {
 
 	// Formパラメータの取得
-	db 		 := c.Params.Form.Get("db")
-	host	 := c.Params.Form.Get("host")
-	port	 := c.Params.Form.Get("port")
-	dbuser	 := c.Params.Form.Get("dbuser")
-	dbname 	 := c.Params.Form.Get("dbname")
-	password := c.Params.Form.Get("password")
+	db 		 = c.Params.Form.Get("db")
+	host	 = c.Params.Form.Get("host")
+	port	 = c.Params.Form.Get("port")
+	dbuser	 = c.Params.Form.Get("dbuser")
+	dbname 	 = c.Params.Form.Get("dbname")
+	password = c.Params.Form.Get("password")
 
 	// バリデーション
 	c.Validation.Required(host)
