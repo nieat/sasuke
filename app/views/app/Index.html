@@ -5,20 +5,20 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-8">
-			こっちにテーブル表示
+			こっちにテーブル表示<br>
 		</div>
 		<div class="col-4">
 			こっちにform
 		</div>
 	</div>
 </div>
-
 </body>
 <script>
+	
 	const table_schema = [
 		{table_name: 'users', columns: ['id','first_name','last_name','created_at','updated_at']},
 		{table_name: 'article', columns: ['id','user_id','content','created_at','updated_at']}
-  ]
+		]
 </script>
 <script src="/public/js/app_index.js"></script>
 {{template "footer.html" .}}
