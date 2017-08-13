@@ -90,14 +90,26 @@ func (c App) Execute() revel.Result {
 		// 外部キーを取得
 		sc := []rune(table)
 		foreign_key := string(sc[:(len(sc) - 1)]) + "_id"
-		query = "select " + select_columns + " from " + table + " left join " + relation + " on " + table + ".id " + "= " + relation + "." + foreign_key
+		query = "select " + select_columns +
+				" from " + table +
+				" left join " + relation +
+				" on " + table + ".id " + "= " + relation + "." + foreign_key
 	}
-	// todo sqlを投げて、その結果を渡す
-	return c.Render(query, columns)
-	// return c.Redirect(App.Result, query)
+
+	// Query実行
+	s := &sql.Handler{}
+	hcolumns, records := s.ExecuteQuery(query)
+
+	return c.Redirect(App.Result, hcolumns, records)
 }
 
 
 func (c App) Result() revel.Result {
-	return c.Render()
+	// （画面確認用）結果画面の確認のため：Query実行
+	query := "select * from articles;"
+	s := &sql.Handler{}
+	hcolumns, records := s.ExecuteQuery(query)
+	return c.Render(hcolumns, records)
+
+	return c.Render(hcolumns, records)
 }
