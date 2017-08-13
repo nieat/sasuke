@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"github.com/revel/revel"
-	// "log"
 	"strings"
 	"fmt"
 )

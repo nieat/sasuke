@@ -1,5 +1,4 @@
 // ()=>{
-	console.log('aaa');
 	var add_form = new Vue({
 		el: '#query_form',
 		methods: {
