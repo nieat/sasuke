@@ -51,11 +51,11 @@ func (c App) Execute() revel.Result {
 		} else {
 			col_sl := strings.Split(columns, ",")
 			for _, col := range col_sl {
-				select_columns = select_columns + table + "." + col + ","
+				select_columns += table + "." + col + " as " + table + "_" + col + ","
 			}
 			r_col_sl := strings.Split(relation_columns, ",")
 			for _, col := range r_col_sl {
-				select_columns = select_columns + relation + "." + col + ","
+				select_columns += relation + "." + col + " as " + relation + "_" + col + ","
 			}
 			csc := []rune(select_columns)
 			select_columns = string(csc[:(len(csc) - 1)])
