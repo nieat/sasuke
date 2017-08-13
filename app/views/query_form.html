@@ -1,0 +1,53 @@
+{{if or .errors .flash.error}}
+<div class="alert alert-error">
+    {{if .flash.error}}
+        {{.flash.error}}
+    {{end}}
+    {{if .errors}}
+    <ul style="margin-top:10px;">
+        {{range .errors}}
+            <li>{{.}}</li>
+        {{end}}
+    </ul>
+    {{end}}
+</div>
+{{end}}
+<div class="tables">
+	<h2>テーブル</h2>
+	<li id="table_name" data-dataname="users">users</li>
+	<div class="table">
+		<div id="column_names" data-dataname="name,old">
+			<h3>カラム</h3>
+			<li>name</li>
+			<li>old</li>
+		</div>
+	</div>
+</div>
+<div class="relation">
+	<h2>結合テーブル</h2>
+	<li id="relation_name" data-dataname="articles">articles</li>
+	<div id="relation_column_names" data-dataname="title,body,category_id">
+		<h3>結合テーブルカラム</h3>
+		<li>title</li>
+		<li>body</li>
+		<li>category_id</li>
+	</div>
+</div>
+<!-- todo (時間があれば)後ほど実装　where区などの指定。２〜３個まで追加可 -->
+<!-- <div id="add_menu">
+	<p>更に条件を設定</p>
+	<div v-if="!show">
+	<div style="cursor:pointer;"><a v-on:click="show = !show"  class="btn btn-danger" style="color:white; font-size:16px;">+</a></div>
+	</div>
+	<transition name="fade" v-cloak>
+		<div v-if="show" style="background-color:orange; width:300px; height:200px; text-align:center;">
+			<p>詳細設定</p>
+			<select></select>
+		</div>
+	</transition>
+</div> -->
+<br>
+<form action="/execute" method="post" name="ex_form" id="query_form">
+	<div id="add_form"></div>
+	<a class="btn btn-default" type="button" value="実行" name="" v-on:click="execute" style="cursor:pointer;">実行</a>
+</form>
