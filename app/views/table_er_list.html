@@ -1,0 +1,33 @@
+<div id='diagrams' style='border: solid 1px black; width:90%; height:700px'>
+  <table v-for="table in table_schema">
+    <tr>
+      <th>{{ "{{table.table_name}}" }}</th>
+    </tr>
+    <tr v-for="column in table.columns">
+      <td>
+        <input type="checkbox" v-bind:id="column" v-bind:value="column" v-model="request_queries"> 
+        <label for="column">{{ "{{column}}" }}</label>
+      </td>
+    </tr>
+  </table>
+  <!-- 選択したカラム名が動的に取得できているかを確認 -->
+  <span>{{ "{{request_queries}}" }}</span>
+</div>
+<script>
+  // import TableDiagram from './components/table_diagram'  
+
+  const table_schema = [
+  {table_name: 'users', columns: ['id','first_name','last_name','created_at','updated_at']},
+  {table_name: 'article', columns: ['id','user_id','content','created_at','updated_at']}
+  ]
+
+  var tables = new Vue({
+    el: '#diagrams',
+    data: function () {
+      return {
+        table_schema,
+        request_queries: []
+      }
+    }
+  })
+</script>

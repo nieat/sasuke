@@ -13,6 +13,7 @@ type Config struct {
 var(
 	db			string
 	host		string
+	port		string
 	dbuser		string
 	dbname		string
 	password	string
@@ -32,14 +33,16 @@ func (c Config) Confirm() revel.Result{
 func (c Config) Save() revel.Result {
 
 	// Formパラメータの取得
-	db 		 := c.Params.Form.Get("db")
-	host	 := c.Params.Form.Get("host")
-	dbuser	 := c.Params.Form.Get("dbuser")
-	dbname 	 := c.Params.Form.Get("dbname")
-	password := c.Params.Form.Get("password")
+	db 		 = c.Params.Form.Get("db")
+	host	 = c.Params.Form.Get("host")
+	port	 = c.Params.Form.Get("port")
+	dbuser	 = c.Params.Form.Get("dbuser")
+	dbname 	 = c.Params.Form.Get("dbname")
+	password = c.Params.Form.Get("password")
 
 	// バリデーション
 	c.Validation.Required(host)
+	c.Validation.Required(port)
 	c.Validation.Required(dbuser)
 	c.Validation.Required(dbname)
 	c.Validation.Required(password)
@@ -54,6 +57,7 @@ func (c Config) Save() revel.Result {
 	// .envファイルへの書き込み文生成
 	dbconfig := 	"db="+ db + "\n" +
 					"host=" + host + "\n" +
+					"port=" + port + "\n" +
 					"dbuser=" + dbuser + "\n" +
 					"dbname=" + dbname + "\n" +
 					"password=" + password

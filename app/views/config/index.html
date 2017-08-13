@@ -15,7 +15,7 @@
 
 			<form method="POST" action="Config/Save">
 				<div class="form-group">
-					<label for="db">DB type</label>
+					<label>DB type</label>
 					<select name="db" class="form-control">
 						<option value="mysql" selected>MySQL</option> <!-- 初期はMySQLのみ対応とする。 -->
 					</select>
@@ -23,8 +23,15 @@
 
 				<div class="form-group">
 					<p class="{{if .error.host}}error{{end}}">
-						<label for="host">dbhost</label><span class="text-danger"> *{{.errors.host.Message}}</span>
-						<input type="text" name="host" value="{{.flash.username}}" class="form-control"/>
+						<label>host</label><span class="text-danger"> *{{.errors.host.Message}}</span>
+						<input type="text" name="host" value="{{.flash.host}}" class="form-control"/>
+					</p>
+				</div>
+
+				<div class="form-group">
+					<p class="{{if .error.port}}error{{end}}">
+						<label>port</label><span class="text-danger"> *{{.errors.port.Message}}</span>
+						<input type="text" name="port" value="{{.flash.port}}" class="form-control"/>
 					</p>
 				</div>
 

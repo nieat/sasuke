@@ -5,10 +5,10 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-8">
-			こっちにテーブル表示<br>
+			{{ template "table_er_list.html" }}
 		</div>
 		<div class="col-4">
-			こっちにform
+			{{ template "query_form.html" }}
 		</div>
 	</div>
 </div>
@@ -20,5 +20,6 @@
 		{table_name: 'article', columns: ['id','user_id','content','created_at','updated_at']}
 		]
 </script>
+<script type="text/javascript" src="/public/js/vue.min.js"></script>
 <script src="/public/js/app_index.js"></script>
 {{template "footer.html" .}}

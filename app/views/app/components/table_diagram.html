@@ -1,0 +1,26 @@
+<div >
+<table id="table_diagram">
+  <tr>
+    <th>{{ "{{table.table_name}}" }}</th>
+  </tr>
+  <tr v-for="column in table.columns">
+    <td>
+      <input type="checkbox" id="column" v-bind:value="column" v-model="request_queries">
+      <input type="hidden" id="table_name" v-bind:value="table.table_name" v-model="table_name">
+      <label for="column">{{ "{{column}}" }}</label>
+    </td>
+  </tr>
+</table>
+
+<script>
+  export default {
+    name: 'TableDiagram',
+    el: '#table_diagram',
+    data: function() {
+      return {
+        table_schema,
+        request_queries: []
+      }
+    }
+  }
+</script>
