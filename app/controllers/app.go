@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/revel/revel"
+	"sasuke/app/service/sql"
 	"strings"
 	"fmt"
 )
@@ -11,7 +12,33 @@ type App struct {
 }
 
 func (c App) Index() revel.Result {
-	return c.Render()
+	s := &sql.Handler{}
+	table_name_slice, column_name_slice := s.FetchTableSchema()
+	// tableのダブり値を削除
+	m := make(map[string]bool)
+	uniq := [] string{}
+
+	for _, ele := range table_name_slice {
+		if !m[ele] {
+			m[ele] = true
+			uniq = append(uniq, ele)
+		}
+	}
+
+	// var table_schema [ len(uniq) ][len(column_name_slice)]string
+
+	//for i:=0 ;i < len(column_name_slice) ;i++  {
+	//
+	//	fmt.Printf(table_name_slice[i])
+	//	fmt.Printf(column_name_slice[i])
+	//	before_index := i -1
+	//	// テーブル名変更された時
+	//	if table_name_slice[i] != table_name_slice[before_index] {
+	//		table_schema[i][0] = table_name_slice[i]
+	//		table_schema[i] = append(table_schema[i], column_name_slice[i])
+	//	}
+	//}
+	return c.Render(table_name_slice, column_name_slice)
 }
 
 func (c App) Execute() revel.Result {
@@ -63,14 +90,26 @@ func (c App) Execute() revel.Result {
 		// 外部キーを取得
 		sc := []rune(table)
 		foreign_key := string(sc[:(len(sc) - 1)]) + "_id"
-		query = "select " + select_columns + " from " + table + " left join " + relation + " on " + table + ".id " + "= " + relation + "." + foreign_key
+		query = "select " + select_columns +
+				" from " + table +
+				" left join " + relation +
+				" on " + table + ".id " + "= " + relation + "." + foreign_key
 	}
-	// todo sqlを投げて、その結果を渡す
-	return c.Render(query, columns)
-	// return c.Redirect(App.Result, query)
+
+	// Query実行
+	s := &sql.Handler{}
+	hcolumns, records := s.ExecuteQuery(query)
+
+	return c.Redirect(App.Result, hcolumns, records)
 }
 
 
 func (c App) Result() revel.Result {
-	return c.Render()
+	// （画面確認用）結果画面の確認のため：Query実行
+	query := "select * from articles;"
+	s := &sql.Handler{}
+	hcolumns, records := s.ExecuteQuery(query)
+	return c.Render(hcolumns, records)
+
+	return c.Render(hcolumns, records)
 }

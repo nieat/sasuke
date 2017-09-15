@@ -8,6 +8,28 @@
     <div class="span6">
       {{template "flash.html" .}}
     </div>
+	  <div class="col-12">
+		  <table class="table">
+			  <thead class="thead-inverse">
+			  	<tr>
+					<th>#</th>
+					{{ range $index, $column := .hcolumns }}
+					<th>{{ $column }}</th>
+					{{ end }}
+				</tr>
+			  </thead>
+			  <tbody>
+	 		  	{{ range $index, $records := .records }}
+			  	<tr>
+					<th scope="row">{{ $index }}</th>
+					{{ range $index, $value := $records }}
+					<th>{{ $value }}</th>
+					{{ end }}
+				</tr>
+			  	{{ end }}
+			  </tbody>
+		  </table>
+	  </div>
   </div>
 </div>
 </body>
