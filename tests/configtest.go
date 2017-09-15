@@ -32,12 +32,13 @@ func (t *ConfigTest) TestConfigPageWorks(){
 
 func (t *ConfigTest) TestConfigPostFormSuccessData(){
 
+	// 自分の開発環境の接続情報
 	testdb = "mysql"
-	testhost = "192.168.192.168"
+	testhost = "0.0.0.0"
 	testport = "3306"
-	testuser = "testuser"
-	testname = "testdb"
-	testpass = "P@ssw0rd"
+	testuser = "root"
+	testname = "SASUKE_TEST"
+	testpass = "mysql"
 
 	configData := url.Values{}
 	configData.Add("db", testdb)
@@ -54,6 +55,7 @@ func (t *ConfigTest) TestConfigPostFormSuccessData(){
 
 	f := &file.Handler{}
 	f.LoadEnv()
+
 	t.AssertEqual(testdb, os.Getenv("db"))
 	t.AssertEqual(testhost, os.Getenv("host"))
 	t.AssertEqual(testport, os.Getenv("port"))

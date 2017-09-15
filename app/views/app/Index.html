@@ -12,8 +12,14 @@
 		</div>
 	</div>
 </div>
-
 </body>
+<script>
+	
+	const table_schema = [
+		{table_name: 'users', columns: ['id','first_name','last_name','created_at','updated_at']},
+		{table_name: 'article', columns: ['id','user_id','content','created_at','updated_at']}
+		]
+</script>
 <script type="text/javascript" src="/public/js/vue.min.js"></script>
 <script src="/public/js/app_index.js"></script>
 {{template "footer.html" .}}
