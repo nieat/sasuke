@@ -1,4 +1,4 @@
-# FREE BI TOOL
+# FREE BI TOOLS
 
 go/revelで作るBIツールです
 
@@ -23,7 +23,7 @@ go/revelで作るBIツールです
         config/       viewとかバリデーションで使う設定ファイルはここにおいてcontrollerで呼び出す
         service/      generate.go みたいに機能ごとにファイル作っていきたい csv.goとかとか
         
-    messages/         Message files
+    messages/         Messages files
 
 	resource/         
         	scss/     
